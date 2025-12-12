@@ -6,6 +6,13 @@ provider "google" {
   region  = var.GOOGLE_REGION
 }
 
+terraform {
+  backend "gcs" {
+    bucket = "gke-cluster-state"
+    prefix = "terraform/state"
+  }
+}
+
 # Create the GKE (Google Kubernetes Engine) cluster
 resource "google_container_cluster" "this" {
   # Name of the cluster
