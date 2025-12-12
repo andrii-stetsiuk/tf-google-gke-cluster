@@ -6,6 +6,14 @@ provider "google" {
   region  = var.GOOGLE_REGION
 }
 
+# Module to instantiate shared GKE configuration via tf-google-gke-cluster
+module "gke_cluster" {
+  source         = "github.com/andrii-stetsiuk/tf-google-gke-cluster"
+  GOOGLE_REGION  = var.GOOGLE_REGION
+  GOOGLE_PROJECT = var.GOOGLE_PROJECT
+  GKE_NUM_NODES  = 2
+}
+
 # Create the GKE (Google Kubernetes Engine) cluster
 resource "google_container_cluster" "this" {
   # Name of the cluster
